@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理學期末考 - 終極保命筆記</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --accent-blue: #3b82f6;
+            --accent-orange: #e67e22;
+            --bg-light: #f1f5f9;
+            --highlight-yellow: #fff3cd;
+            --danger-red: #ef4444;
+        }
+
+        body { 
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
+            line-height: 1.8; 
+            background-color: var(--bg-light); 
+            color: #334155; 
+            margin: 0; 
+            padding-top: 80px; /* 為導覽列留空間 */
+            scroll-behavior: smooth;
+        }
+
+        /* --- 頂部全局導覽列 --- */
+        .navbar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .navbar-brand { font-weight: 800; letter-spacing: 1px; }
+        .nav-link { font-weight: 500; transition: 0.3s; margin: 0 5px; }
+        .nav-link:hover { color: var(--accent-blue) !important; }
+
+        /* --- 左側快速索引 --- */
+        .sidebar {
+            position: fixed;
+            left: 30px;
+            top: 150px;
+            width: 150px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        .sidebar p { font-size: 0.8rem; font-weight: bold; color: #94a3b8; margin-bottom: 15px; }
+        .sidebar a {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            transition: 0.3s;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+        }
+        .sidebar a:hover { color: var(--accent-blue); border-left: 3px solid var(--accent-blue); }
+
+        /* --- 主內容容器 --- */
+        .container-main { 
+            max-width: 900px; 
+            margin: 0 auto 60px auto; 
+            background: #fff; 
+            padding: 60px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05); 
+        }
+
+        header h1 { 
+            font-weight: 800;
+            color: var(--primary-dark); 
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 { 
+            background: linear-gradient(90deg, var(--primary-dark), #334155);
+            color: #fff; 
+            padding: 14px 24px; 
+            border-radius: 12px; 
+            margin-top: 60px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        h2 i { margin-right: 12px; color: var(--accent-blue); }
+
+        h3 { 
+            color: var(--accent-orange); 
+            border-left: 6px solid var(--accent-orange); 
+            padding-left: 15px; 
+            margin: 35px 0 20px 0; 
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .highlight { 
+            background-color: var(--highlight-yellow); 
+            font-weight: bold; 
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #92400e;
+        }
+
+        .important-box { 
+            background-color: #f0f9ff; 
+            border-left: 6px solid var(--accent-blue); 
+            padding: 25px; 
+            margin: 25px 0; 
+            border-radius: 12px;
+            font-size: 1.1rem;
+        }
+
+        .crisis { 
+            color: var(--danger-red); 
+            font-weight: bold; 
+            background: #fef2f2;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid #fee2e2;
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        th { background-color: #f8fafc; color: var(--primary-dark); padding: 16px; font-weight: 700; }
+        td { padding: 16px; border-top: 1px solid #e2e8f0; }
+
+        @media (max-width: 1150px) {
+            .sidebar { display: none; }
+            .container-main { padding: 30px; width: 95%; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="bi bi-shield-check me-2"></i>管理學保命筆記</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="CH06_Deep_Dive.html">CH06 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH07_Strategic_Planning.html">CH07 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH08_Organizational_Structure.html">CH08 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH09_Growth_and_Change.html">CH09 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH10_Motivation.html">CH10 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH11_Leadership.html">CH11 詳細重點</a></li>
+                <li class="nav-item"><a class="nav-link" href="CH12_Communication.html">CH12 詳細重點</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="sidebar">
+    <p>頁面內跳轉</p>
+    <a href="#ch06">CH06 決策</a>
+    <a href="#ch07">CH07 規劃</a>
+    <a href="#ch08">CH08 組織</a>
+    <a href="#ch09">CH09 變革</a>
+    <a href="#ch10">CH10 激勵</a>
+    <a href="#ch11">CH11 領導</a>
+    <a href="#ch12">CH12 溝通</a>
+</div>
+
+<div class="container container-main">
+    <header>
+        <h1>管理學期末考重點整理 (CH06-CH12)</h1>
+        <p class="text-center text-muted">最後衝刺使用：請確保黃色標籤與藍色框內的內容已熟記</p>
+    </header>
+
+    <section id="ch06">
+        <h2><i class="bi bi-cpu"></i>CH06 決策：解決問題的關鍵</h2>
+        <div class="important-box">
+            <strong>核心概念：</strong> 古典模型（完全理性、最適解） vs. 行政模型（有限理性、滿意解）。
+        </div>
+        <ul>
+            <li><strong>決策情境：</strong> 確定（資訊足）、<span class="highlight">風險（有機率）</span>、不確定（資訊無）。</li>
+            <li><strong>認知謬誤：</strong> 選擇性認知、加碼投注（不認賠）、先入為主。</li>
+            <li><strong>群體決策技術：</strong>
+                <ul>
+                    <li><strong>腦力激盪：</strong> 拒絕批評、以量孕質。</li>
+                    <li><strong>德菲法：</strong> 匿名、專家問卷、達成共識。</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="ch07">
+        <h2><i class="bi bi-compass"></i>CH07 規劃與策略：開創未來</h2>
+        <h3>1. 策略工具 (必考圖表)</h3>
+        
+
+[Image of BCG matrix]
+
+        <table>
+            <thead>
+                <tr>
+                    <th>類型</th>
+                    <th>特性</th>
+                    <th>策略建議</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>明星 (Star)</td>
+                    <td>高成長、高市佔</td>
+                    <td>大量投資、維持領導</td>
+                </tr>
+                <tr>
+                    <td>金牛 (Cash Cow)</td>
+                    <td>低成長、高市佔</td>
+                    <td>榨取現金、養活其他單位</td>
+                </tr>
+                <tr>
+                    <td>問號 (Question)</td>
+                    <td>高成長、低市佔</td>
+                    <td>評估潛力、決定是否加碼</td>
+                </tr>
+                <tr>
+                    <td>瘦狗 (Dog)</td>
+                    <td>低成長、低市佔</td>
+                    <td>撤資、精簡或清算</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>2. 波特五力分析</h3>
+        <ul>
+            <li>現有競爭者、潛在進入者、替代品威脅、供應商議價力、購買者議價力。</li>
+        </ul>
+    </section>
+
+    <section id="ch08">
+        <h2><i class="bi bi-diagram-3"></i>CH08 組織概論：結構設計</h2>
+        <ul>
+            <li><strong>管理幅度：</strong> 高瘦型（層級多、嚴密） vs. 扁平型（層級少、彈性）。</li>
+            <li><strong>職權：</strong> 直線職權（指揮下屬）與幕僚職權（輔助、建議）。</li>
+            <li><strong>組織形式：</strong> 功能別、事業部別、<span class="highlight">矩陣組織（多重指揮、容易衝突）</span>。</li>
+        </ul>
+    </section>
+
+    <section id="ch09">
+        <h2><i class="bi bi-arrow-up-right-circle"></i>CH09 組織成長與變革</h2>
+        <h3>Greiner 成長五階段與危機</h3>
+        <ol>
+            <li>創造力成長 &rarr; <span class="crisis">領導危機</span></li>
+            <li>指揮成長 &rarr; <span class="crisis">自主性危機</span></li>
+            <li>授權成長 &rarr; <span class="crisis">控制危機</span></li>
+            <li>協調成長 &rarr; <span class="crisis">繁文縟節危機</span></li>
+            <li>合作成長 &rarr; <span class="crisis">心理飽和危機</span></li>
+        </ol>
+    </section>
+
+    <section id="ch10">
+        <h2><i class="bi bi-lightning-charge"></i>CH10 激勵：提升士氣</h2>
+        <h3>1. 雙因子理論 (Herzberg)</h3>
+        <ul>
+            <li><strong>保健因子：</strong> 公司政策、薪資。沒有會不爽，有也沒激勵感。</li>
+            <li><strong>激勵因子：</strong> 成就感、工作本身。才是驅動努力的主因。</li>
+        </ul>
+        <h3>2. 期望理論 (Vroom)</h3>
+        <div class="important-box text-center">
+            <div class="fw-bold mb-2" style="font-size: 1.3rem;">激勵力 = 期望 &times; 工具 &times; 期望值</div>
+            <div class="text-muted small">(努力&rarr;績效) | (績效&rarr;獎酬) | (獎酬吸引力)</div>
+        </div>
+    </section>
+
+    <section id="ch11">
+        <h2><i class="bi bi-people"></i>CH11 領導：帶領團隊</h2>
+        <ul>
+            <li><strong>權力來源：</strong> 法定權、獎賞權、威嚇權、專家權、參照權。</li>
+            <li><strong>管理方格 (9,9)：</strong> 最理想的狀態，兼顧工作與人員。</li>
+            <li><strong>情境領導 (SLT)：</strong>
+                <ul>
+                    <li>能力低/意願低 &rarr; 告知型</li>
+                    <li>能力高/意願高 &rarr; 授權型</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="ch12">
+        <h2><i class="bi bi-chat-quote"></i>CH12 溝通：有效共識</h2>
+        <ul>
+            <li><strong>障礙：</strong> 選擇性認知、情緒、文字解讀差異、雜訊。</li>
+            <li><strong>主動傾聽：</strong> 避免價值判斷、完整接收訊息、提供適當回饋。</li>
+            <li><strong>非正式溝通：</strong> 葡萄藤溝通，速度快但不一定準確，管理者應適度監測。</li>
+        </ul>
+    </section>
+
+    <footer class="mt-5 pt-5 text-center border-top">
+        <p class="text-muted">© 期末考順利，祝你通通 100 分！</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

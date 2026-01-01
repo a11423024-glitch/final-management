@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理學深層解析 - 第八章：組織概論</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-purple: #673ab7;
+            --dark-purple: #311b92;
+            --light-purple: #f3e5f5;
+            --bg-gray: #f4f4f9;
+            --accent-red: #d32f2f;
+        }
+
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.8;
+            background-color: var(--bg-gray);
+            color: #333;
+            padding-top: 80px;
+            scroll-behavior: smooth;
+        }
+
+        /* --- 頂部導覽列 --- */
+        .navbar {
+            background: rgba(49, 27, 146, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--primary-purple);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+        }
+
+        .nav-link.active {
+            color: #fff !important;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+        }
+
+        /* --- 側邊索引 (電腦版) --- */
+        .sidebar {
+            position: fixed;
+            left: 20px;
+            top: 150px;
+            width: 150px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: var(--primary-purple);
+            border-left: 3px solid var(--primary-purple);
+        }
+
+        /* --- 主內容容器 --- */
+        .container-main {
+            max-width: 1000px;
+            margin: 0 auto 60px auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-weight: 800;
+            color: var(--dark-purple);
+            text-align: center;
+            border-bottom: 4px solid var(--primary-purple);
+            display: inline-block;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #fff;
+            background: linear-gradient(90deg, var(--dark-purple), var(--primary-purple));
+            padding: 12px 25px;
+            border-radius: 12px;
+            margin-top: 50px;
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 12px;
+        }
+
+        h3 {
+            color: var(--dark-purple);
+            border-left: 6px solid var(--primary-purple);
+            padding-left: 15px;
+            margin-top: 35px;
+            font-weight: 700;
+        }
+
+        .logic-box {
+            background: #ede7f6;
+            border: 1px solid #d1c4e9;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            color: #4527a0;
+        }
+
+        /* 對比框設計 */
+        .vs-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .vs-card {
+            flex: 1;
+            min-width: 300px;
+            padding: 25px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .vs-card:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .vs-title {
+            font-weight: 800;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-bottom: 2px dashed #d1c4e9;
+            padding-bottom: 10px;
+        }
+
+        /* 表格樣式 */
+        .table-responsive {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+        }
+
+        th {
+            background-color: var(--light-purple);
+            color: var(--dark-purple);
+            padding: 15px;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            color: var(--accent-red);
+            font-weight: 800;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .container-main {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-diagram-3-fill me-2"></i>管理學學習系統</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="study_guide.html">總目錄</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH06_Deep_Dive.html">CH06 決策</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH07_Strategic_Planning.html">CH07 規劃</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="CH08_Organizational_Structure.html">CH08
+                            組織</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH09_Growth_and_Change.html">CH09 變革</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH10_Motivation.html">CH10 激勵</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH11_Leadership.html">CH11 領導</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH12_Communication.html">CH12 溝通</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <p class="text-muted fw-bold mb-3" style="font-size:0.75rem;">本頁重點</p>
+        <a href="#section1">基本課題</a>
+        <a href="#section2">層級對比</a>
+        <a href="#section3">職權區分</a>
+        <a href="#section4">結構形式</a>
+        <a href="#section5">創新型組織</a>
+    </div>
+
+    <div class="container container-main">
+        <div class="text-center">
+            <h1>第八章：組織概論 (Organizational Structure)</h1>
+        </div>
+
+        <section id="section1">
+            <h2><i class="bi bi-gear-fill"></i>1. 組織結構設計的五大基本課題</h2>
+            <div class="logic-box">
+                <p class="mb-3">組織結構是為了確保員工間能達成<b>「高效率分工協調」</b>的正式制度：</p>
+                <ul class="mb-0">
+                    <li><b>分工與協調：</b> 專業分工提升生產力，但需透過協調機制解決本位主義。</li>
+                    <li><b>指揮鏈：</b> 職權從高層到基層的一條連續性權力線。</li>
+                    <li><b>管理幅度：</b> 主管直接管轄的人數。</li>
+                    <li><b>集權與分權：</b> 決策權集中在頂層或分散至各層級。</li>
+                    <li><b>部門化：</b> 將工作重新組合的基礎。</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="section2">
+            <h2><i class="bi bi-bar-chart-steps"></i>2. 管理幅度 vs. 組織層級</h2>
+
+            <div class="vs-container">
+                <div class="vs-card">
+                    <div class="vs-title">高瘦型組織 (Tall Structure)</div>
+                    <ul>
+                        <li>管理幅度<span class="highlight">小</span>（管的人少）。</li>
+                        <li>組織層級<span class="highlight">多</span>。</li>
+                        <li><b>優點：</b> 監督嚴密、溝通控制較容易。</li>
+                        <li><b>缺點：</b> 行政成本高、決策慢、基層感受疏離。</li>
+                    </ul>
+                </div>
+                <div class="vs-card">
+                    <div class="vs-title">扁平型組織 (Flat Structure)</div>
+                    <ul>
+                        <li>管理幅度<span class="highlight">大</span>（管的人多）。</li>
+                        <li>組織層級<span class="highlight">少</span>。</li>
+                        <li><b>優點：</b> 決策快、資訊失真少、管理成本低。</li>
+                        <li><b>缺點：</b> 主管負擔重、監督較鬆。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3">
+            <h2><i class="bi bi-person-badge-fill"></i>3. 直線職權與幕僚職權</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>種類</th>
+                            <th>定義與功能</th>
+                            <th>常見部門</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>直線職權 (Line Authority)</b></td>
+                            <td>擁有直接下令、指揮下屬達成目標的權力。</td>
+                            <td>生產、行銷、業務。</td>
+                        </tr>
+                        <tr>
+                            <td><b>幕僚職權 (Staff Authority)</b></td>
+                            <td>提供專業建議、支援直線部門，無直接指揮權。</td>
+                            <td>人力資源、法律、財務。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="section4">
+            <h2><i class="bi bi-grid-3x3-gap-fill"></i>4. 常見的組織結構形式 (必考比較)</h2>
+
+            <h3>A. 功能別結構 (Functional Structure)</h3>
+            <p>依據專業技能劃分（如：研發部、財務部）。<br>
+                <span class="highlight">優點：</span> 專業深、資源利用率高。<br>
+                <span class="highlight">缺點：</span> 各部門間溝通困難（煙囪效應）、反應慢。
+            </p>
+
+            <h3>B. 事業部別結構 (Divisional Structure)</h3>
+            <p>依據產品、地理區域或顧客類別劃分。<br>
+                <span class="highlight">優點：</span> 反應靈活、權責明確、培養全方位經理人。<br>
+                <span class="highlight">缺點：</span> 資源重複配置、跨部競爭。
+            </p>
+
+            <h3>C. 矩陣組織 (Matrix Structure)</h3>
+
+
+            [Image of Matrix Organizational Structure]
+
+            <div class="highlight-box">
+                <p class="mb-0">結合功能別與專案別的特點。<br>
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i><b>核心考點：</b> 違反了「統一指揮原則」，部屬有<b>兩位主管</b>。<br>
+                    <span class="highlight">缺點：</span> 角色混淆、容易產生衝突。但適合處理複雜、需要高度跨部門協作的任務。
+                </p>
+            </div>
+        </section>
+
+        <section id="section5">
+            <h2><i class="bi bi-rocket-takeoff-fill"></i>5. 創新型組織 (Adhocracy)</h2>
+            <div class="logic-box">
+                <p>這是一種<b>有機式 (Organic)</b> 的結構，具有以下特性：</p>
+                <ul class="mb-0">
+                    <li><b>高度彈性：</b> 去除明顯的行政區分。</li>
+                    <li><b>彼此調適：</b> 透過跨領域專家組成的「特別任務小組」進行協調。</li>
+                    <li><b>適用環境：</b> 高度複雜、動態變化的產業（如：高科技研發）。</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="mt-5 pt-5 text-center border-top">
+            <p class="text-muted">第 8 章結束 | 搞懂「統一指揮」與「管理幅度」是得分關鍵！</p>
+            <a href="CH09_Growth_and_Change.html" class="btn btn-primary rounded-pill px-4">前往下一章：CH09 變革</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理學深層解析 - 第九章：組織成長與變革</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-red: #c0392b;
+            --dark-red: #922b21;
+            --light-red: #f9ebeb;
+            --bg-gray: #fdf2f2;
+            --step-green: #1abc9c;
+        }
+
+        body { 
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif; 
+            line-height: 1.8; 
+            background-color: var(--bg-gray); 
+            color: #333; 
+            padding-top: 80px; 
+            scroll-behavior: smooth;
+        }
+
+        /* --- 頂部導覽列 --- */
+        .navbar {
+            background: rgba(146, 43, 33, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid var(--primary-red);
+        }
+        .navbar-brand { font-weight: 800; }
+        .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.15); border-radius: 8px; }
+
+        /* --- 側邊索引 (電腦版) --- */
+        .sidebar {
+            position: fixed;
+            left: 20px;
+            top: 150px;
+            width: 150px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        .sidebar a {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+            transition: 0.3s;
+        }
+        .sidebar a:hover { color: var(--primary-red); border-left: 3px solid var(--primary-red); }
+
+        /* --- 主內容容器 --- */
+        .container-main { 
+            max-width: 1000px; 
+            margin: 0 auto 60px auto; 
+            background: #fff; 
+            padding: 50px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05); 
+        }
+
+        h1 { 
+            font-weight: 800; 
+            color: var(--dark-red); 
+            text-align: center;
+            border-bottom: 4px solid var(--primary-red);
+            display: inline-block;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+        }
+
+        h2 { 
+            color: #fff; 
+            background: linear-gradient(90deg, var(--dark-red), var(--primary-red));
+            padding: 12px 25px; 
+            border-radius: 12px; 
+            margin-top: 50px; 
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        h2 i { margin-right: 12px; }
+
+        h3 { 
+            color: var(--dark-red); 
+            border-left: 6px solid var(--primary-red); 
+            padding-left: 15px; 
+            margin-top: 35px;
+            font-weight: 700;
+        }
+
+        /* 危機區塊 */
+        .crisis-box { 
+            background: var(--light-red); 
+            border: 1px solid #f5b7b1; 
+            padding: 25px; 
+            margin: 25px 0; 
+            border-radius: 15px;
+            color: #7b241c;
+        }
+
+        /* 變革步驟卡片 */
+        .change-step { 
+            background: #f0fdfa; 
+            border-left: 6px solid var(--step-green); 
+            padding: 15px 20px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            transition: transform 0.2s;
+        }
+        .change-step:hover { transform: translateX(10px); background: #e6fffa; }
+        .step-num { font-weight: 900; color: var(--step-green); margin-right: 10px; font-style: italic; }
+
+        /* 表格樣式 */
+        .table-responsive { border-radius: 15px; overflow: hidden; border: 1px solid #f5b7b1; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+        th { background-color: #f2d7d5; color: var(--dark-red); padding: 15px; font-weight: 700; }
+        td { padding: 15px; border-top: 1px solid #f5b7b1; text-align: center; }
+
+        .important { color: var(--primary-red); font-weight: 800; }
+        .highlight { background-color: #ffffcc; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .container-main { padding: 30px 20px; margin: 10px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-arrow-up-right-circle-fill me-2"></i>管理學學習系統</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="study_guide.html">總目錄</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH06_Deep_Dive.html">CH06 決策</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH07_Strategic_Planning.html">CH07 規劃</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH08_Organizational_Structure.html">CH08 組織</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="CH09_Growth_and_Change.html">CH09 變革</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH10_Motivation.html">CH10 激勵</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH11_Leadership.html">CH11 領導</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CH12_Communication.html">CH12 溝通</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar">
+        <p class="text-muted fw-bold mb-3" style="font-size:0.75rem;">本頁重點</p>
+        <a href="#section1">成長模型</a>
+        <a href="#section2">變革原因</a>
+        <a href="#section3">八步驟管理</a>
+        <a href="#section4">抗拒與對策</a>
+    </div>
+
+    <div class="container container-main">
+        <div class="text-center">
+            <h1>第九章：組織成長與變革 (Growth & Change)</h1>
+        </div>
+
+        <section id="section1">
+            <h2><i class="bi bi-graph-up-arrow"></i>1. Greiner 組織成長模型</h2>
+            <p class="text-muted mt-3">組織會隨著「時間」與「規模」經歷不同的成長階段，每個階段的末尾都會爆發一個關鍵危機：</p>
+            
+            
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>階段</th>
+                            <th>成長動力</th>
+                            <th>引發的危機</th>
+                            <th>解決方式</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>第一階段</td>
+                            <td><b>創造力</b> (創業期)</td>
+                            <td class="important">領導危機</td>
+                            <td>聘僱專業經理人</td>
+                        </tr>
+                        <tr>
+                            <td>第二階段</td>
+                            <td><b>指揮</b> (效率期)</td>
+                            <td class="important">自主性危機</td>
+                            <td>適度授權給下屬</td>
+                        </tr>
+                        <tr>
+                            <td>第三階段</td>
+                            <td><b>授權</b> (擴張期)</td>
+                            <td class="important">控制危機</td>
+                            <td>加強協調機制</td>
+                        </tr>
+                        <tr>
+                            <td>第四階段</td>
+                            <td><b>協調</b> (整合期)</td>
+                            <td class="important">繁文縟節危機</td>
+                            <td>強調人際合作</td>
+                        </tr>
+                        <tr>
+                            <td>第五階段</td>
+                            <td><b>合作</b> (團隊期)</td>
+                            <td class="important">心理飽和危機</td>
+                            <td>組織再造與創新</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="section2">
+            <h2><i class="bi bi-question-circle-fill"></i>2. 為什麼需要變革？</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="crisis-box h-100">
+                        <h5 class="fw-bold"><i class="bi bi-globe me-2"></i>外部環境</h5>
+                        <ul class="mb-0">
+                            <li>科技進步（如AI、自動化）</li>
+                            <li>市場競爭激烈化</li>
+                            <li>法律與法規變更</li>
+                            <li>全球經濟波動</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="crisis-box h-100">
+                        <h5 class="fw-bold"><i class="bi bi-building me-2"></i>內部環境</h5>
+                        <ul class="mb-0">
+                            <li>公司策略重大調整</li>
+                            <li>勞動力組成改變</li>
+                            <li>老舊設備更新需求</li>
+                            <li>員工士氣或態度低落</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section3">
+            <h2><i class="bi bi-list-check"></i>3. 啟動變革管理 (Kotter 八步驟)</h2>
+            <p class="text-muted mt-3">變革需要有系統的引導，核心步驟如下：</p>
+            
+            
+
+            <div class="change-step"><span class="step-num">01.</span><b>建立危機感：</b> 讓組織成員意識到「不變革就無法生存」。</div>
+            <div class="change-step"><span class="step-num">02.</span><b>成立領導團隊：</b> 組織具備影響力的種子成員來推動變革。</div>
+            <div class="change-step"><span class="step-num">03.</span><b>溝通變革願景：</b> 透過各種管道讓員工建立信任、支持與承諾。</div>
+            <div class="change-step"><span class="step-num">04.</span><b>移除變革障礙：</b> 掃除反對勢力、修改阻礙變革的舊制度。</div>
+            <div class="change-step"><span class="step-num">05.</span><b>創造短期戰果：</b> 藉由小勝利來增強成員信心，降低挫折感。</div>
+        </section>
+
+        <section id="section4">
+            <h2><i class="bi bi-shield-exclamation"></i>4. 員工為何抗拒變革？與其對策</h2>
+            <div class="crisis-box">
+                <div class="row">
+                    <div class="col-md-6 border-end">
+                        <h5 class="fw-bold text-danger">抗拒原因</h5>
+                        <ul>
+                            <li><b>既得利益受損：</b> 害怕失去權力或福利。</li>
+                            <li><b>不確定感：</b> 對未知恐懼（學不會、不適應）。</li>
+                            <li><b>認知差異：</b> 認為目前的變革不正確。</li>
+                            <li><b>缺乏信任：</b> 對管理者有疑慮。</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 ps-md-4">
+                        <h5 class="fw-bold text-success">應對對策</h5>
+                        <ul>
+                            <li><b>教育與溝通：</b> 解除誤解。</li>
+                            <li><b>參與討論：</b> 讓員工有參與感。</li>
+                            <li><b>支援與輔導：</b> 提供教育訓練。</li>
+                            <li><b>談判協商：</b> 給予適當補償或交換。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section5">
+            <h2><i class="bi bi-person-up"></i>5. 變革領導人的必要特質</h2>
+            <div class="logic-box p-4 border rounded bg-light">
+                <p>領導人必須引導成員經歷 <span class="highlight">解凍 &rarr; 移動 &rarr; 重新凍結</span> 的過程：</p>
+                <ul class="mb-0">
+                    <li>願意承受<b>短期犧牲</b>，展現長期願景的決心。</li>
+                    <li>將變革訊息整合到日常工作中，做到<b>以身作則</b>。</li>
+                    <li>建立明確的回饋機制，確保變革後的行為被<b>制度化</b>。</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="mt-5 pt-5 text-center border-top">
+            <p class="text-muted">第 9 章結束 | 搞懂五階段危機，考試就贏一半！</p>
+            <a href="CH10_Motivation.html" class="btn btn-danger rounded-pill px-4">前往下一章：CH10 激勵</a>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
